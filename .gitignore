@@ -9,3 +9,6 @@
 
 # Pandoc outputs
 *.html
+
+# Conreality SDK for C
+conreality.h
