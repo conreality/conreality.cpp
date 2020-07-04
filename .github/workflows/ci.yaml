@@ -1,0 +1,20 @@
+---
+name: Continuous integration
+on: push
+jobs:
+  lint:
+    name: Lint source code
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v2
+      - name: Download the conreality.h header file
+        run: wget https://raw.githubusercontent.com/conreality/conreality.c/${GITHUB_REF#refs/heads/}/conreality.h
+      - name: Record the Clang version
+        run: clang --version
+      - name: Record the GCC version
+        run: gcc --version
+      - name: Check syntax using Clang
+        run: clang -x c++-header -std=c++17 -Wall -Wextra -fsyntax-only conreality.hpp
+      - name: Check syntax using GCC
+        run: gcc -x c++-header -std=c++17 -Wall -Wextra -fsyntax-only conreality.hpp
